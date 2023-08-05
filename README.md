@@ -1,1 +1,3 @@
 # Entrify
+
+Welcome to Entrify!
