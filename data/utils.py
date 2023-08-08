@@ -4,8 +4,7 @@ from urllib.parse import urlparse, parse_qs
 def process_job_item(driver):
     job_item = {}
 
-    src = driver.page_source
-    html = BeautifulSoup(src, 'html.parser')
+    html = soupify(driver)
     url = driver.current_url
     parsed_url = urlparse(url)
     # Get job ID from the URL query parameter
@@ -29,3 +28,21 @@ def process_job_item(driver):
                          + " or a change in the HTML format."
                          + " Please investigate the issue.")
     return job_item
+
+
+def soupify(driver):
+    src = driver.page_source
+    return BeautifulSoup(src, 'html.parser')
+
+
+def extract_job_list(driver):
+    html = soupify(driver)
+    return html.css.select(".scaffold-layout__list-container > li")
+
+
+def find_next_job(driver, job_id):
+    html = soupify(driver)
+    origin = html.find("div", {"data-job-id": job_id})
+    next_job = origin.find_next("div", class_ = "job-card-container--clickable")
+    
+    return next_job["data-job-id"] if next_job else None
