@@ -2,11 +2,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from secrets import li_username, li_pass
-from utils import process_job_item, extract_job_list, find_next_job
+from utils import process_job_item, find_next_job, get_next_page
 from database import create_job
 import time
 
 def extract_li_data():
+    print("Starting process...")
     driver = webdriver.Chrome()
     driver.get("https://www.linkedin.com/login")
 
@@ -31,24 +32,35 @@ def extract_li_data():
 
     driver.get(job_search_url)
 
-    # Wait until the page renders completely
-    time.sleep(5)
+    while True:
 
-    job_list = driver.find_elements(By.CSS_SELECTOR, ".scaffold-layout__list-container > li")
-    
-    for li in job_list:
-        driver.execute_script("arguments[0].scrollIntoView()", li)
-        time.sleep(2)
+        # Wait until the page renders completely
+        time.sleep(5)
 
-        try:
-            li.find_element(By.CSS_SELECTOR, "div")
-        except NoSuchElementException:
-            time.sleep(3)
+        job_list = driver.find_elements(By.CSS_SELECTOR, ".scaffold-layout__list-container > li")
+        
+        for li in job_list:
+            driver.execute_script("arguments[0].scrollIntoView()", li)
+            time.sleep(2)
 
-        job_item = process_job_item(driver)
-        create_job(job_item)
-        next_job_id = find_next_job(driver, job_item["job_id"])
-        driver.find_element(By.XPATH, f"//div[@data-job-id='{next_job_id}']").click()
+            try:
+                li.find_element(By.CSS_SELECTOR, "div")
+            except NoSuchElementException:
+                time.sleep(3)
+
+            job_item = process_job_item(driver)
+            create_job(job_item)
+
+            if next_job_id := find_next_job(driver, job_item["job_id"]):
+                driver.find_element(By.XPATH, f"//div[@data-job-id='{next_job_id}']").click()
+            else:
+                break
+        
+        if next_page := get_next_page(driver):
+            driver.find_element(By.XPATH, f"//button[@aria-label='Page {next_page}']").click()
+        else:
+            print("All pages processed.")
+            break
 
     driver.quit()
 
