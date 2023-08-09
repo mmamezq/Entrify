@@ -2,3 +2,4 @@ secrets.py
 .DS_Store
 env
 __*
+*.json
