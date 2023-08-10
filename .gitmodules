@@ -1,0 +1,3 @@
+[submodule "li-job-scraper"]
+	path = li-job-scraper
+	url = https://github.com/emikobell/li-job-scraper
