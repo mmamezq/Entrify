@@ -3,8 +3,6 @@ import re
 import json
 from autocorrect import Speller
 
-
-
 def remove_text_markup(text):
     clean_text = re.sub(r'<.*?>', '', text)
     clean_text = re.sub(r'\n+', '', clean_text) # Replace newline character
