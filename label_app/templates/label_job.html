@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Label Job{% endblock %}
+
+{% block body %}
+<div class="container text-center p-4">
+    <div class="row align-items-center justify-content-center p-3">
+        <div class="col">
+            <h3>Job Title: </h3>{{ job.job_title }}
+        </div>
+    </div>
+    <div class="row align-items-center justify-content-center p-3">
+        <div class="col">
+            <h3>Job Description: </h3>
+            <br/>
+            <p>{{ job.job_details }}</p>
+        </div>
+    </div>
+    <div class="row align-items-center justify-content-center p-3">
+        <div class="col">
+            <p id="job-id">{{ job.job_id }}</p>
+        </div>
+    </div>
+    <div class="row align-items-center justify-content-center p-3">
+        <div class="col-4">
+            <h3>Instructions:</h3>
+            <p>Press <b>m</b> for entry level <br/>
+                Press <b>z</b> for experienced<br/>
+                Press <b>space</b> if unsure<br/>
+                </ul>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/label.js"></script>
+{% endblock %}

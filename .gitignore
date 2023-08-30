@@ -3,3 +3,4 @@ secrets.py
 env
 __*
 *.json
+flask_session

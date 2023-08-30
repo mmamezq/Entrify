@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Label App Home{% endblock %}
+
+{% block body %}
+<div class="container text-center p-4">
+    <div class="row align-items-center justify-content-center py-5">
+        <div class="col-4">
+            <h1>Label App</h1>
+        </div>
+    </div>
+    <form>
+        <div class="row align-items-center justify-content-center p-3">
+            <div class="col-4">
+                <a href="/label/none">
+                    <button id="label-unlabelled" type="button" class="btn btn-light btn-lg">
+                        Label Unlabelled Jobs
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-center p-3">
+            <div class="col-4">
+                <a href="/label/1">
+                    <button id="validate-entry" type="button" class="btn btn-light btn-lg">
+                        Validate Entry Level Jobs
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-center p-3">
+            <div class="col-4">
+                <a href="/label/0">
+                    <button id="validate-experienced" type="button" class="btn btn-light btn-lg">
+                        Validate Experienced Jobs
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-center p-3">
+            <div class="col-4">
+                <a href="/label/-1">
+                    <button id="label-uncertain" type="button" class="btn btn-light btn-lg">
+                        Label Uncertain Jobs
+                    </button>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}
