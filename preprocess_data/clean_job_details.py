@@ -2,18 +2,14 @@ import re
 from autocorrect import Speller
 from tqdm import tqdm
 
+
 def remove_text_markup(text):
-    clean_text = re.sub(r'<.*?>', '', text) # Remove any HTML markup
-    clean_text = re.sub(r'\n+', '', clean_text) # Replace newline character
+    clean_text = re.sub(r'<.*?>', '', text)  # Remove any HTML markup
+    clean_text = re.sub(r'\n+', '', clean_text)  # Replace newline character
     clean_text = re.sub(r'\s+', ' ', clean_text)  # Replace multiple spaces with a single space
     clean_text = re.sub(r'About the job', '', clean_text, flags=re.IGNORECASE)  # Remove 'About the job'
 
     return clean_text
-
-# def autocorrect_typos(text):
-#     spell = Speller(lang='en')
-#     clean_text = spell(text)
-#     return clean_text
 
 def autocorrect_typos(texts):
     spell = Speller(lang='en')
@@ -24,13 +20,19 @@ def autocorrect_typos(texts):
         corrected_texts.append(clean_text)
 
     return corrected_texts
+
+
 def lowercase_text(text):
     lowercase_text = str.lower(text)
+
     return lowercase_text
+
 
 def remove_privateuse_chars(text):
     clean_text = text.replace('\uf0b7', '')
+
     return clean_text
+
 
 def remove_bullet_points(text):
     # Replace bullet points (• or * followed by space) with an empty string
@@ -43,18 +45,23 @@ def remove_bullet_points(text):
     cleaned_text = re.sub(r'-{2,}', '', cleaned_text)
     return cleaned_text
 
+
 def remove_extra_punctuation(text):
     cleaned_text = re.sub(r"[.]{2,3}", '', text)
-    cleaned_text = re.sub(r"[_]{2,}", '', text)
+    cleaned_text = re.sub(r"[_]{2,}", '', cleaned_text)
     return cleaned_text
+
 
 def remove_inclusion_statement(text):
-    cleaned_text = re.sub(r'we (do not|don\'t | prohibit) (discriminate | discrimination) ?(.*) ?(based) ?(on|upon) .*?', '', text)
+    cleaned_text = re.sub(
+        r'we (do not|don\'t | prohibit) (discriminate | discrimination) ?(.*) ?(based) ?(on|upon) .*?', '', text)
     return cleaned_text
 
+
 def remove_email_address(text):
-    cleaned_text = re.sub(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', 'EMAIL',text)
+    cleaned_text = re.sub(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', 'EMAIL', text)
     return cleaned_text
+
 
 def remove_urls(text):
     url_pattern = re.compile(r'(?:http[s]?://)(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+|'
@@ -62,10 +69,10 @@ def remove_urls(text):
                              r'email us at | email at',
                              flags=re.IGNORECASE)
 
-    # Remove URLs and related phrases using re.sub
     cleaned_text = re.sub(url_pattern, '', text)
 
     return cleaned_text
+
 
 def clean_job_details(df):
     # Remove any text markup from LinkedIn
