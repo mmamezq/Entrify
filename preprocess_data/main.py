@@ -7,18 +7,18 @@ reload(ppd)
 
 
 def main(data_path, testing=False, num_samples=100):
-    cleaned_df, tokens, vocabulary = ppd.preprocess_data(data_path, testing, num_samples=100)
+    cleaned_df, tokens, vocabulary = ppd.preprocess_data(data_path, testing, num_samples )
 
     return cleaned_df, tokens, vocabulary
 
 
 if __name__ == '__main__':
     data_path = 'backup.json'
-    cleaned_df, tokens, vocabulary = main(data_path, testing=True, num_samples=100)
+    cleaned_df, tokens, vocabulary = main(data_path, testing=True, num_samples=10)
 
     wrap_width = 80
     while True:
-        selected_row = cleaned_df.sample(n=1)
+        selected_row = cleaned_df.sample(n=10)
 
         job_details = selected_row['cleaned_job_details'].values[0]
         original_job_deats = selected_row['job_details'].values[0]
