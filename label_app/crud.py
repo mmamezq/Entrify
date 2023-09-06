@@ -36,6 +36,10 @@ def get_advanced_job_ids():
     return id_list
 
 
+def get_labelled_count():
+    return Job.query.filter(Job.label != -1).count()
+
+
 def update_uncertainty(obj, uncertain):
     obj.uncertain = uncertain
     db.session.commit()
