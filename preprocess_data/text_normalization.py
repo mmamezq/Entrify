@@ -1,5 +1,14 @@
 import spacy
 
+'''
+In this file we will normalize text data. This involves the following procedures: 
+
+1. Tokenization 
+2. Removing puncuation
+3. Stop word removal 
+4. Lemmatization
+'''
+
 nlp = spacy.load("en_core_web_sm")
 
 def tokenize_text(text):
