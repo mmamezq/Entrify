@@ -38,8 +38,9 @@ def render_labeller(level):
 @app.route('/label_entry/<job_id>')
 def render_label_job(job_id):
     job = crud.get_job(job_id)
+    count = crud.get_labelled_count()
 
-    return render_template('label_job.html', job=job)
+    return render_template('label_job.html', job=job, count=count)
 
 
 @app.route('/update')
