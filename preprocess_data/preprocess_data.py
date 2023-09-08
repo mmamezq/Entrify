@@ -1,5 +1,5 @@
 import text_cleaning as c
-import tokenizer as t
+from preprocess_data.text_normalization import text_normalization as t
 import utils
 
 

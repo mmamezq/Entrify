@@ -13,7 +13,7 @@ def main(data_path, testing=False, num_samples=100):
 
 
 if __name__ == '__main__':
-    data_path = 'backup.json'
+    data_path = 'data/backup.json'
     cleaned_df, tokens, vocabulary = main(data_path, testing=True, num_samples=10)
 
     wrap_width = 80
