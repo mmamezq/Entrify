@@ -16,13 +16,14 @@ def compute_length(df):
 
 def pad_text_sequences(seq, max_length):
     padded_sequence = pad_sequences(seq, maxlen = max_length, padding = 'post', truncating = 'post')
-
+    return padded_sequence
 
 def vectorize(df):
     print('Tokenizing cleaned text...')
     tokenized_ouput, tokens = df['cleaned_job_details'].apply(tokenize_text)
     df['bert_tokenizer_data'] = tokenized_ouput
-    df['token_ids'] = tokens
     max_length = compute_length(df['token_ids'])
+    df['token_ids'] = df.apply(lambda row: pad_text_sequences(row['token_ids'], max_length=max_length))
+
 
     return df
