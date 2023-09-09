@@ -4,3 +4,4 @@ env
 __*
 *.json
 flask_session
+/preprocess_data/test.ipynb

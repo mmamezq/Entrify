@@ -1,0 +1,14 @@
+1. Tokenize inputs using BERT (input_ids are the processed data to be used as input to LSTM model)
+2. Pad Sequences and Truncate based on desired sequence length
+    Types of padding:
+        1. Determine maximum sequence length:
+            - can select 95th percentile of sequence lengths in dataframe.
+        2. Fixed vs. Dynamic Padding:
+            - Padding length can be fixed where all sequences are padded to the same maximum length (as above)
+            - Dynamic padding: where each sequence is padded to its own length within a batch
+    Our approach:
+        - Because we develop and train our own LSTM from scratch, we use the 95th percentile
+          of sequence length for the padding/truncation process.
+        - This approach compromises between retaining as much data as possible while compensating for computing resource availabilty
+
+        - NOTE: This selection may be finetuned and changed upon model training.
