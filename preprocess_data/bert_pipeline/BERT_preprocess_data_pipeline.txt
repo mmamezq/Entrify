@@ -12,3 +12,9 @@
         - This approach compromises between retaining as much data as possible while compensating for computing resource availabilty
 
         - NOTE: This selection may be finetuned and changed upon model training.
+3. Convert token ids to embeddings
+    - We can either use embeddings from pre-trained models such as BERT or initialize
+      embeddings randomly within the embedding layer of the LSTM (or other NLP) model
+    Our approach:
+        - We utilize BERT's token id's as input to a pre-trained BERT model (bert-uncased-base).
+        - We use the output of BERT as input to the embedding layer of the LSTM model.
