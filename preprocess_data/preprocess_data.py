@@ -1,5 +1,4 @@
-import text_cleaning as c
-from preprocess_data.text_normalization import text_normalization as t
+from preprocess_data.text_normalization import text_normalization as t, text_cleaning as c
 import utils
 
 
