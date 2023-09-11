@@ -5,3 +5,4 @@ __*
 *.json
 flask_session
 /preprocess_data/test.ipynb
+/generate_data/data_091123.json
